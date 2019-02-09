@@ -6,6 +6,6 @@ JenkinsFile=https://github.com/Laxmi007/ConfigRepo.git
  	codeCoverage=80
  	unitTesting=100
  	codeAnalysis=0
-  username=Admin
+username=Admin
 password=password
-java=
+
