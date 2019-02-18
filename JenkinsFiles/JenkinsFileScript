@@ -9,14 +9,21 @@ def loadProperties() {
 	}
 }
 
-
+def notify(status){
+	emailext(
+		to: "bhanuprakash.bg@gmail.com",
+		subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+		body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' :</p>
+		<p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+		)
+	}
 
 
 node('master'){
 		
 	try {
 		//Mail notification informing build start
-		//notify('Project Build Started')
+		notify('Project Build Started')
 		
 		
 		//Load Properties file from config repo
@@ -36,12 +43,12 @@ node('master'){
 		
 		
 		//Mail notification informing build completion
-		//notify('Project Build Completed')
+		notify('Project Build Completed')
 		
 		
 	} catch(err) {
 		//Mail notification if there are any failures
-		//notify("Error ${err}")
+		notify("Error ${err}")
 		currentBuild.result='FAILURE'
 	}
 		
