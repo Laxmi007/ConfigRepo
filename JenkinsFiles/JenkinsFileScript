@@ -4,14 +4,14 @@ def loadProperties() {
 	node {
 		checkout scm
 		properties = new Properties()		
-		File propertiesFile = new File("${workspace}/Properties/Pipeline.properties")
+		File propertiesFile = new File("${workspace}/Properties/pipeline.properties")
 		properties.load(propertiesFile.newDataInputStream())    		
 	}
 }
 
 def notify(status){
 	emailext(
-		to: "sahutrue@gmail.com",
+		to: "laxmi.sahu@mindtree.com",
 		subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
 		body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' :</p>
 		<p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
